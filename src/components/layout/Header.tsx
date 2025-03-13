@@ -5,7 +5,6 @@ import { Link, useLocation } from "react-router-dom";
 export const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
-  const isHomePage = location.pathname === "/";
 
   return (
     <header className="box-border sticky backdrop-blur-[2px] shadow-[0_1px_2px_rgba(0,0,0,0.05)] z-[100] bg-[rgba(255,255,255,0.8)] top-0">
@@ -19,61 +18,30 @@ export const Header = () => {
         </Link>
 
         <div className="box-border flex gap-6 m-0 p-0 max-md:hidden">
-          {isHomePage ? (
-            <>
-              <a
-                href="#services"
-                className="box-border text-gray-600 underline text-base"
-              >
-                Services
-              </a>
-              <Link
-                to="/about"
-                className="box-border text-gray-600 underline text-base"
-              >
-                About
-              </Link>
-              <a
-                href="#faq"
-                className="box-border text-gray-600 underline text-base"
-              >
-                FAQ's
-              </a>
-              <a
-                href="#contact"
-                className="box-border text-gray-600 underline text-base"
-              >
-                Contact
-              </a>
-            </>
-          ) : (
-            <>
-              <Link
-                to="/#services"
-                className="box-border text-gray-600 underline text-base"
-              >
-                Services
-              </Link>
-              <Link
-                to="/about"
-                className="box-border text-gray-600 underline text-base"
-              >
-                About
-              </Link>
-              <Link
-                to="/#faq"
-                className="box-border text-gray-600 underline text-base"
-              >
-                FAQ's
-              </Link>
-              <Link
-                to="/#contact"
-                className="box-border text-gray-600 underline text-base"
-              >
-                Contact
-              </Link>
-            </>
-          )}
+          <Link
+            to="/services"
+            className={`box-border text-gray-600 text-base ${location.pathname === "/services" ? "font-semibold" : ""}`}
+          >
+            Services
+          </Link>
+          <Link
+            to="/about"
+            className={`box-border text-gray-600 text-base ${location.pathname === "/about" ? "font-semibold" : ""}`}
+          >
+            About
+          </Link>
+          <Link
+            to="/faqs"
+            className={`box-border text-gray-600 text-base ${location.pathname === "/faqs" ? "font-semibold" : ""}`}
+          >
+            FAQ's
+          </Link>
+          <Link
+            to="/contact"
+            className={`box-border text-gray-600 text-base ${location.pathname === "/contact" ? "font-semibold" : ""}`}
+          >
+            Contact
+          </Link>
         </div>
 
         <button className="box-border text-white text-[12.5px] bg-indigo-600 px-[26px] py-2.5 rounded-full border-2 border-solid border-black hover:bg-indigo-700 transition-colors">
@@ -91,37 +59,34 @@ export const Header = () => {
         {isMobileMenuOpen && (
           <div className="absolute top-full left-0 right-0 bg-white shadow-lg p-4 md:hidden">
             <div className="flex flex-col gap-4">
-              {isHomePage ? (
-                <>
-                  <a href="#services" className="text-gray-600 hover:text-gray-900">
-                    Services
-                  </a>
-                  <Link to="/about" className="text-gray-600 hover:text-gray-900">
-                    About
-                  </Link>
-                  <a href="#faq" className="text-gray-600 hover:text-gray-900">
-                    FAQ's
-                  </a>
-                  <a href="#contact" className="text-gray-600 hover:text-gray-900">
-                    Contact
-                  </a>
-                </>
-              ) : (
-                <>
-                  <Link to="/#services" className="text-gray-600 hover:text-gray-900">
-                    Services
-                  </Link>
-                  <Link to="/about" className="text-gray-600 hover:text-gray-900">
-                    About
-                  </Link>
-                  <Link to="/#faq" className="text-gray-600 hover:text-gray-900">
-                    FAQ's
-                  </Link>
-                  <Link to="/#contact" className="text-gray-600 hover:text-gray-900">
-                    Contact
-                  </Link>
-                </>
-              )}
+              <Link 
+                to="/services"
+                className="text-gray-600 hover:text-gray-900"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Services
+              </Link>
+              <Link 
+                to="/about"
+                className="text-gray-600 hover:text-gray-900" 
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                About
+              </Link>
+              <Link 
+                to="/faqs"
+                className="text-gray-600 hover:text-gray-900"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                FAQ's
+              </Link>
+              <Link 
+                to="/contact"
+                className="text-gray-600 hover:text-gray-900"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Contact
+              </Link>
             </div>
           </div>
         )}
