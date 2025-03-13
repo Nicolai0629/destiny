@@ -1,3 +1,4 @@
+
 export const Footer = () => {
   return (
     <footer className="box-border bg-gray-900 py-12">
@@ -49,7 +50,7 @@ export const Footer = () => {
             <ul>
               <li className="mb-3">
                 <a
-                  href="#about"
+                  href="/about"
                   className="text-gray-400 hover:text-gray-300 underline"
                 >
                   About Us
@@ -57,7 +58,7 @@ export const Footer = () => {
               </li>
               <li className="mb-3">
                 <a
-                  href="#services"
+                  href="/services"
                   className="text-gray-400 hover:text-gray-300 underline"
                 >
                   Our Services
@@ -65,7 +66,7 @@ export const Footer = () => {
               </li>
               <li className="mb-3">
                 <a
-                  href="#faq"
+                  href="/faqs"
                   className="text-gray-400 hover:text-gray-300 underline"
                 >
                   FAQ's
@@ -73,7 +74,7 @@ export const Footer = () => {
               </li>
               <li className="mb-3">
                 <a
-                  href="#contact"
+                  href="/contact"
                   className="text-gray-400 hover:text-gray-300 underline"
                 >
                   Contact Us
@@ -89,7 +90,7 @@ export const Footer = () => {
             <ul>
               <li className="mb-3">
                 <a
-                  href="#"
+                  href="/services"
                   className="text-gray-400 hover:text-gray-300 underline"
                 >
                   IT Outsourcing
@@ -97,7 +98,7 @@ export const Footer = () => {
               </li>
               <li className="mb-3">
                 <a
-                  href="#"
+                  href="/services"
                   className="text-gray-400 hover:text-gray-300 underline"
                 >
                   Customer Support
@@ -105,7 +106,7 @@ export const Footer = () => {
               </li>
               <li className="mb-3">
                 <a
-                  href="#"
+                  href="/services"
                   className="text-gray-400 hover:text-gray-300 underline"
                 >
                   Back Office Support
@@ -113,7 +114,7 @@ export const Footer = () => {
               </li>
               <li className="mb-3">
                 <a
-                  href="#"
+                  href="/services"
                   className="text-gray-400 hover:text-gray-300 underline"
                 >
                   Digital Marketing
@@ -121,7 +122,7 @@ export const Footer = () => {
               </li>
               <li className="mb-3">
                 <a
-                  href="#"
+                  href="/services"
                   className="text-gray-400 hover:text-gray-300 underline"
                 >
                   Data Entry Services
