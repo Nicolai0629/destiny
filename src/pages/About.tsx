@@ -1,6 +1,7 @@
 
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { Card } from "@/components/ui/card";
 
 const About = () => {
   return (
@@ -34,28 +35,28 @@ const About = () => {
           <div className="max-w-[1312px] mx-auto px-6">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {/* Vision Card */}
-              <div className="bg-white p-8 rounded-lg shadow-sm">
+              <Card className="bg-white p-8 rounded-lg shadow-sm transition-transform duration-300 hover:-translate-y-2 hover:shadow-md">
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">Our Vision</h3>
                 <p className="text-gray-600">
                   To be the global leader in outsourcing solutions, known for innovation, reliability, and exceptional service delivery.
                 </p>
-              </div>
+              </Card>
 
-              {/* Values Card */}
-              <div className="bg-white p-8 rounded-lg shadow-sm border-2 border-indigo-500">
+              {/* Values Card - removed border-2 border-indigo-500 */}
+              <Card className="bg-white p-8 rounded-lg shadow-sm transition-transform duration-300 hover:-translate-y-2 hover:shadow-md">
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">Our Values</h3>
                 <p className="text-gray-600">
                   Excellence, integrity, innovation, and customer-centricity guide everything we do at OutSource Pro.
                 </p>
-              </div>
+              </Card>
 
               {/* Impact Card */}
-              <div className="bg-white p-8 rounded-lg shadow-sm">
+              <Card className="bg-white p-8 rounded-lg shadow-sm transition-transform duration-300 hover:-translate-y-2 hover:shadow-md">
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">Our Impact</h3>
                 <p className="text-gray-600">
                   We've helped hundreds of businesses reduce costs and improve efficiency through our tailored solutions.
                 </p>
-              </div>
+              </Card>
             </div>
           </div>
         </section>
