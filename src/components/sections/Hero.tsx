@@ -16,15 +16,12 @@ export const Hero = () => {
             Scale your operations, reduce costs, and focus on core business
             activities with our professional outsourcing solutions.
           </p>
-          <div className="box-border flex gap-8 max-sm:flex-col max-sm:gap-4">
+          <div className="box-border">
             <button 
               className="box-border text-white text-[12.5px] bg-indigo-600 px-[34px] py-3.5 rounded-full border-2 border-solid border-black max-sm:w-full hover:bg-indigo-700 transition-colors"
               onClick={() => setLoginDialogOpen(true)}
             >
               Get Started
-            </button>
-            <button className="box-border text-gray-600 text-[12.7px] bg-[#EFEFEF] px-8 py-3.5 rounded-full border-2 border-solid border-[#AAA] max-sm:w-full hover:bg-gray-200 transition-colors">
-              Learn More
             </button>
           </div>
         </div>

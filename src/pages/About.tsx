@@ -24,7 +24,13 @@ const About = () => {
               </div>
               
               <div className="flex-1">
-                <div className="bg-gray-200 rounded-lg w-full h-[260px] lg:h-[230px] shadow-md"></div>
+                <div className="rounded-lg w-full h-[260px] lg:h-[230px] shadow-md overflow-hidden">
+                  <img 
+                    src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80" 
+                    alt="Team collaborating around laptops" 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
               </div>
             </div>
           </div>
