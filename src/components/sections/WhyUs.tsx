@@ -1,3 +1,4 @@
+
 import { WhyUsItem } from "../ui/WhyUsItem";
 
 const whyUsItems = [
@@ -36,7 +37,13 @@ export const WhyUs = () => {
             />
           ))}
         </div>
-        <div className="box-border w-[806px] h-[520px] shadow-[0_20px_25px_-5px_rgba(0,0,0,0.1),0_10px_10px_-5px_rgba(0,0,0,0.04)] bg-white rounded-[20px] max-md:w-full max-md:h-[400px]" />
+        <div className="box-border w-[806px] h-[520px] shadow-[0_20px_25px_-5px_rgba(0,0,0,0.1),0_10px_10px_-5px_rgba(0,0,0,0.04)] bg-white rounded-[20px] overflow-hidden max-md:w-full max-md:h-[400px]">
+          <img 
+            src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80" 
+            alt="Man working on laptop" 
+            className="w-full h-full object-cover"
+          />
+        </div>
       </div>
     </section>
   );

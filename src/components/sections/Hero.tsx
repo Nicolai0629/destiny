@@ -28,7 +28,13 @@ export const Hero = () => {
             </button>
           </div>
         </div>
-        <div className="box-border w-[636px] h-[383px] shadow-[0_20px_25px_-5px_rgba(0,0,0,0.1),0_10px_10px_-5px_rgba(0,0,0,0.04)] bg-white rounded-lg max-md:w-full max-md:h-[300px]" />
+        <div className="box-border w-[636px] h-[383px] shadow-[0_20px_25px_-5px_rgba(0,0,0,0.1),0_10px_10px_-5px_rgba(0,0,0,0.04)] bg-white rounded-lg overflow-hidden max-md:w-full max-md:h-[300px]">
+          <img 
+            src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80" 
+            alt="Team collaborating around laptops" 
+            className="w-full h-full object-cover"
+          />
+        </div>
       </div>
       
       <LoginDialog open={loginDialogOpen} onOpenChange={setLoginDialogOpen} />
