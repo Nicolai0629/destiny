@@ -1,9 +1,11 @@
 
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { LoginDialog } from "@/components/auth/LoginDialog";
 
 export const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [loginDialogOpen, setLoginDialogOpen] = useState(false);
   const location = useLocation();
 
   return (
@@ -44,7 +46,10 @@ export const Header = () => {
           </Link>
         </div>
 
-        <button className="box-border text-white text-[12.5px] bg-indigo-600 px-[26px] py-2.5 rounded-full border-2 border-solid border-black hover:bg-indigo-700 transition-colors">
+        <button 
+          className="box-border text-white text-[12.5px] bg-indigo-600 px-[26px] py-2.5 rounded-full border-2 border-solid border-black hover:bg-indigo-700 transition-colors"
+          onClick={() => setLoginDialogOpen(true)}
+        >
           Get Started
         </button>
 
@@ -91,6 +96,8 @@ export const Header = () => {
           </div>
         )}
       </nav>
+      
+      <LoginDialog open={loginDialogOpen} onOpenChange={setLoginDialogOpen} />
     </header>
   );
 };
