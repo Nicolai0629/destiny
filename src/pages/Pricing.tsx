@@ -3,6 +3,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Pricing as PricingSection } from "@/components/sections/Pricing";
 import { EnhancedFAQ } from "@/components/sections/EnhancedFAQ";
+import { Link } from "react-router-dom";
 
 const PricingPage = () => {
   return (
@@ -38,12 +39,12 @@ const PricingPage = () => {
               </div>
               
               <div className="flex flex-col sm:flex-row justify-center gap-4">
-                <a 
-                  href="mailto:contact@outsourcepro.com" 
+                <Link 
+                  to="/contact" 
                   className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none"
                 >
                   Contact Sales
-                </a>
+                </Link>
                 
                 <a 
                   href="tel:+1(555)123-4567" 

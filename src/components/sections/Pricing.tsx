@@ -4,10 +4,12 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Check } from "lucide-react";
 import { useState } from "react";
 import { LoginDialog } from "@/components/auth/LoginDialog";
+import { useNavigate, Link } from "react-router-dom";
 
 export const Pricing = () => {
   const [billingCycle, setBillingCycle] = useState<"monthly" | "yearly">("monthly");
   const [loginDialogOpen, setLoginDialogOpen] = useState(false);
+  const navigate = useNavigate();
   
   const pricingPlans = [
     {
@@ -58,6 +60,10 @@ export const Pricing = () => {
       isPopular: false,
     },
   ];
+
+  const handleGetStarted = (plan: string) => {
+    navigate("/checkout", { state: { plan, billingCycle } });
+  };
 
   return (
     <section className="py-16 bg-gray-50">
@@ -129,7 +135,7 @@ export const Pricing = () => {
                 <Button 
                   className="w-full" 
                   variant={plan.isPopular ? "default" : "outline"}
-                  onClick={() => setLoginDialogOpen(true)}
+                  onClick={() => handleGetStarted(plan.name)}
                 >
                   Get Started
                 </Button>
@@ -138,8 +144,6 @@ export const Pricing = () => {
           ))}
         </div>
       </div>
-      
-      <LoginDialog open={loginDialogOpen} onOpenChange={setLoginDialogOpen} />
     </section>
   );
 };
