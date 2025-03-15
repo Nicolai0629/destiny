@@ -1,12 +1,16 @@
 
-import { useState } from "react";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
+import { useState, useEffect } from "react";
+import { PageLayout } from "@/components/layout/page-layout";
+import { PageHero } from "@/components/ui/page-hero";
+import { SectionContainer } from "@/components/ui/section-container";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Clock, Search } from "lucide-react";
+import { ArrowRight, Clock, Search, Tag } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Input } from "@/components/ui/input";
+import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface BlogPost {
   title: string;
@@ -22,6 +26,17 @@ interface BlogPost {
 const BlogPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
+  const [activeTag, setActiveTag] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  
+  useEffect(() => {
+    // Simulate loading delay
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+    
+    return () => clearTimeout(timer);
+  }, []);
   
   const blogPosts: BlogPost[] = [
     {
@@ -87,6 +102,7 @@ const BlogPage = () => {
   ];
 
   const categories = Array.from(new Set(blogPosts.map(post => post.category)));
+  const allTags = Array.from(new Set(blogPosts.flatMap(post => post.tags))).sort();
   
   const filteredPosts = blogPosts.filter(post => {
     const matchesSearch = searchQuery === "" || 
@@ -95,73 +111,156 @@ const BlogPage = () => {
       post.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
     
     const matchesCategory = activeCategory === null || post.category === activeCategory;
+    const matchesTag = activeTag === null || post.tags.includes(activeTag);
     
-    return matchesSearch && matchesCategory;
+    return matchesSearch && matchesCategory && matchesTag;
   });
 
+  // Animation variants
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+  
+  const item = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0 }
+  };
+
+  // Loading skeleton component
+  const BlogCardSkeleton = () => (
+    <div className="overflow-hidden h-full rounded-md border border-gray-200">
+      <Skeleton className="h-48 w-full" />
+      <div className="p-5">
+        <div className="flex justify-between items-center mb-2">
+          <Skeleton className="h-4 w-20" />
+          <Skeleton className="h-4 w-24" />
+        </div>
+        <Skeleton className="h-6 w-3/4 mb-3" />
+        <Skeleton className="h-4 w-full mb-2" />
+        <Skeleton className="h-4 w-11/12 mb-6" />
+        <div className="flex justify-between">
+          <Skeleton className="h-4 w-20" />
+          <Skeleton className="h-4 w-24" />
+        </div>
+      </div>
+    </div>
+  );
+
   return (
-    <div className="min-h-screen flex flex-col">
-      <Header />
-      <main className="flex-grow">
-        <section className="bg-indigo-50 py-20">
-          <div className="max-w-[1312px] mx-auto px-6">
-            <div className="text-center max-w-3xl mx-auto">
-              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-                OutSource Pro Blog
-              </h1>
-              <p className="text-xl text-gray-600 mb-8">
-                Latest insights, tips, and trends on outsourcing and business optimization
-              </p>
-              <div className="relative max-w-xl mx-auto">
-                <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">
-                  <Search size={18} />
-                </div>
-                <Input
-                  type="text"
-                  placeholder="Search articles..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10 py-3 border-gray-300 focus:border-indigo-500"
-                />
+    <PageLayout>
+      <PageHero
+        title="OutSource Pro Blog"
+        subtitle="Latest insights, tips, and trends on outsourcing and business optimization"
+        bgColor="bg-gradient-to-r from-indigo-50 to-blue-50"
+      >
+        <div className="relative max-w-xl mx-auto mt-8">
+          <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">
+            <Search size={18} />
+          </div>
+          <Input
+            type="text"
+            placeholder="Search articles..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="pl-10 py-3 border-gray-300 focus:border-indigo-500"
+          />
+        </div>
+      </PageHero>
+
+      <SectionContainer>
+        <div className="flex flex-col space-y-8">
+          {/* Categories and Tags */}
+          <div className="flex flex-col space-y-6">
+            <div>
+              <h3 className="font-medium mb-3">Categories</h3>
+              <div className="flex flex-wrap gap-2">
+                <button
+                  onClick={() => setActiveCategory(null)}
+                  className={cn(
+                    "px-4 py-2 rounded-full text-sm font-medium transition-colors",
+                    activeCategory === null
+                      ? "bg-indigo-600 text-white"
+                      : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                  )}
+                >
+                  All Categories
+                </button>
+                {categories.map((category) => (
+                  <button
+                    key={category}
+                    onClick={() => setActiveCategory(category)}
+                    className={cn(
+                      "px-4 py-2 rounded-full text-sm font-medium transition-colors",
+                      activeCategory === category
+                        ? "bg-indigo-600 text-white"
+                        : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                    )}
+                  >
+                    {category}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <h3 className="font-medium mb-3">Popular Tags</h3>
+              <div className="flex flex-wrap gap-2">
+                {activeTag !== null && (
+                  <button
+                    onClick={() => setActiveTag(null)}
+                    className="px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors"
+                  >
+                    Clear
+                  </button>
+                )}
+                {allTags.slice(0, 8).map((tag) => (
+                  <button
+                    key={tag}
+                    onClick={() => setActiveTag(tag)}
+                    className={cn(
+                      "px-3 py-1 rounded-full text-xs font-medium transition-colors flex items-center gap-1",
+                      activeTag === tag
+                        ? "bg-indigo-100 text-indigo-700"
+                        : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                    )}
+                  >
+                    <Tag size={12} />
+                    {tag}
+                  </button>
+                ))}
               </div>
             </div>
           </div>
-        </section>
 
-        <section className="py-16">
-          <div className="max-w-[1312px] mx-auto px-6">
-            <div className="flex flex-wrap justify-center gap-2 mb-12">
-              <button
-                onClick={() => setActiveCategory(null)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                  activeCategory === null
-                    ? "bg-indigo-600 text-white"
-                    : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-                }`}
-              >
-                All Topics
-              </button>
-              {categories.map((category) => (
-                <button
-                  key={category}
-                  onClick={() => setActiveCategory(category)}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                    activeCategory === category
-                      ? "bg-indigo-600 text-white"
-                      : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-                  }`}
-                >
-                  {category}
-                </button>
+          {/* Blog Posts */}
+          {isLoading ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {Array.from({ length: 6 }).map((_, index) => (
+                <BlogCardSkeleton key={index} />
               ))}
             </div>
-
-            {filteredPosts.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 animate-fade-in">
-                {filteredPosts.map((post, index) => (
-                  <Card key={index} className="overflow-hidden h-full hover:shadow-md transition-shadow">
+          ) : filteredPosts.length > 0 ? (
+            <motion.div 
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+              variants={container}
+              initial="hidden"
+              animate="show"
+            >
+              {filteredPosts.map((post, index) => (
+                <motion.div key={index} variants={item}>
+                  <Card className="overflow-hidden h-full hover:shadow-md transition-shadow">
                     <div className="aspect-video w-full overflow-hidden">
-                      <img src={post.image} alt={post.title} className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
+                      <img 
+                        src={post.image} 
+                        alt={post.title} 
+                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" 
+                      />
                     </div>
                     <CardHeader>
                       <div className="flex justify-between items-center mb-2">
@@ -170,12 +269,31 @@ const BlogPage = () => {
                         </span>
                         <span className="text-xs text-gray-500">{post.date}</span>
                       </div>
-                      <CardTitle className="text-xl">{post.title}</CardTitle>
+                      <CardTitle className="text-xl line-clamp-2">{post.title}</CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <CardDescription className="text-gray-700">
+                      <CardDescription className="text-gray-700 line-clamp-3">
                         {post.excerpt}
                       </CardDescription>
+                      <div className="flex flex-wrap gap-1 mt-3">
+                        {post.tags.slice(0, 2).map((tag, i) => (
+                          <span 
+                            key={i} 
+                            className="text-xs px-2 py-0.5 rounded bg-gray-100 text-gray-600"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              setActiveTag(tag);
+                            }}
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                        {post.tags.length > 2 && (
+                          <span className="text-xs px-2 py-0.5 rounded bg-gray-100 text-gray-600">
+                            +{post.tags.length - 2}
+                          </span>
+                        )}
+                      </div>
                     </CardContent>
                     <CardFooter className="flex justify-between">
                       <div className="flex items-center text-sm text-gray-500">
@@ -183,35 +301,56 @@ const BlogPage = () => {
                         {post.readTime} min read
                       </div>
                       <Link to={`/blog/${post.slug}`}>
-                        <Button variant="link" className="p-0 h-auto font-medium text-indigo-600 hover:text-indigo-800">
-                          Read more <ArrowRight size={14} className="ml-1" />
+                        <Button variant="link" className="p-0 h-auto font-medium text-indigo-600 hover:text-indigo-800 group">
+                          Read more 
+                          <ArrowRight size={14} className="ml-1 transition-transform group-hover:translate-x-1" />
                         </Button>
                       </Link>
                     </CardFooter>
                   </Card>
-                ))}
-              </div>
-            ) : (
-              <div className="text-center py-16">
-                <h3 className="text-xl font-medium text-gray-900 mb-2">No articles found</h3>
-                <p className="text-gray-600 mb-6">
-                  We couldn't find any articles matching your search criteria.
-                </p>
-                <Button
-                  onClick={() => {
-                    setSearchQuery("");
-                    setActiveCategory(null);
-                  }}
-                >
-                  Reset filters
-                </Button>
-              </div>
-            )}
+                </motion.div>
+              ))}
+            </motion.div>
+          ) : (
+            <div className="text-center py-16">
+              <h3 className="text-xl font-medium text-gray-900 mb-2">No articles found</h3>
+              <p className="text-gray-600 mb-6">
+                We couldn't find any articles matching your search criteria.
+              </p>
+              <Button
+                onClick={() => {
+                  setSearchQuery("");
+                  setActiveCategory(null);
+                  setActiveTag(null);
+                }}
+              >
+                Reset filters
+              </Button>
+            </div>
+          )}
+        </div>
+      </SectionContainer>
+
+      {/* Newsletter Section */}
+      <SectionContainer bgColor="bg-indigo-50">
+        <div className="max-w-3xl mx-auto text-center">
+          <h2 className="text-2xl font-bold mb-3">Subscribe to Our Newsletter</h2>
+          <p className="text-gray-600 mb-6">
+            Get the latest outsourcing insights and tips delivered directly to your inbox.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-2 max-w-md mx-auto">
+            <Input
+              type="email"
+              placeholder="Your email address"
+              className="border-gray-300"
+            />
+            <Button className="bg-indigo-600 hover:bg-indigo-700">
+              Subscribe
+            </Button>
           </div>
-        </section>
-      </main>
-      <Footer />
-    </div>
+        </div>
+      </SectionContainer>
+    </PageLayout>
   );
 };
 
