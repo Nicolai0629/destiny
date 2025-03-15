@@ -6,11 +6,7 @@ import { useState } from "react";
 import { LoginDialog } from "@/components/auth/LoginDialog";
 import { useNavigate, Link } from "react-router-dom";
 
-interface PricingProps {
-  checkoutPath?: string;
-}
-
-export const Pricing = ({ checkoutPath = "/checkout" }: PricingProps) => {
+export const Pricing = () => {
   const [billingCycle, setBillingCycle] = useState<"monthly" | "yearly">("monthly");
   const [loginDialogOpen, setLoginDialogOpen] = useState(false);
   const navigate = useNavigate();
@@ -66,7 +62,7 @@ export const Pricing = ({ checkoutPath = "/checkout" }: PricingProps) => {
   ];
 
   const handleGetStarted = (plan: string) => {
-    navigate(checkoutPath, { state: { plan, billingCycle } });
+    navigate("/checkout", { state: { plan, billingCycle } });
   };
 
   return (
@@ -148,8 +144,6 @@ export const Pricing = ({ checkoutPath = "/checkout" }: PricingProps) => {
           ))}
         </div>
       </div>
-      
-      <LoginDialog open={loginDialogOpen} onOpenChange={setLoginDialogOpen} />
     </section>
   );
 };
