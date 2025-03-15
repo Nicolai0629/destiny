@@ -148,6 +148,8 @@ export const Pricing = ({ checkoutPath = "/checkout" }: PricingProps) => {
           ))}
         </div>
       </div>
+      
+      <LoginDialog open={loginDialogOpen} onOpenChange={setLoginDialogOpen} />
     </section>
   );
 };
