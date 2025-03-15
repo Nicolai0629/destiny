@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { LoginDialog } from "@/components/auth/LoginDialog";
+import { Menu, Search } from "lucide-react";
 
 export const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -44,6 +45,18 @@ export const Header = () => {
           >
             Contact
           </Link>
+          <Link
+            to="/blog"
+            className={`box-border text-gray-600 text-base ${location.pathname === "/blog" ? "font-semibold" : ""}`}
+          >
+            Blog
+          </Link>
+          <Link
+            to="/pricing"
+            className={`box-border text-gray-600 text-base ${location.pathname === "/pricing" ? "font-semibold" : ""}`}
+          >
+            Pricing
+          </Link>
         </div>
 
         <button 
@@ -58,11 +71,11 @@ export const Header = () => {
           className="hidden max-md:block"
           aria-label="Toggle mobile menu"
         >
-          <i className="ti ti-menu-2 text-2xl" />
+          <Menu size={24} />
         </button>
 
         {isMobileMenuOpen && (
-          <div className="absolute top-full left-0 right-0 bg-white shadow-lg p-4 md:hidden">
+          <div className="absolute top-full left-0 right-0 bg-white shadow-lg p-4 md:hidden animate-fade-in">
             <div className="flex flex-col gap-4">
               <Link 
                 to="/services"
@@ -91,6 +104,20 @@ export const Header = () => {
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Contact
+              </Link>
+              <Link 
+                to="/blog"
+                className="text-gray-600 hover:text-gray-900"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Blog
+              </Link>
+              <Link 
+                to="/pricing"
+                className="text-gray-600 hover:text-gray-900"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Pricing
               </Link>
             </div>
           </div>
