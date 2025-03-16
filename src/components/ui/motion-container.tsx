@@ -1,6 +1,6 @@
 
 import { cn } from "@/lib/utils";
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useState } from "react";
 
 interface MotionContainerProps {
   children: ReactNode;
@@ -13,12 +13,24 @@ export const MotionContainer = ({
   className,
   delay = 0,
 }: MotionContainerProps) => {
+  const [isVisible, setIsVisible] = useState(false);
+  
+  useEffect(() => {
+    // Small delay to ensure component mounts properly before animation
+    const timer = setTimeout(() => {
+      setIsVisible(true);
+    }, 50 + delay * 100);
+    
+    return () => clearTimeout(timer);
+  }, [delay]);
+  
   const delayClass = delay ? `delay-${delay}00` : "";
   
   return (
     <div
       className={cn(
-        "animate-fade-in opacity-0",
+        "transition-all duration-500",
+        isVisible ? "opacity-100" : "opacity-0",
         delayClass,
         className
       )}
