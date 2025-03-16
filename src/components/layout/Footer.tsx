@@ -18,7 +18,7 @@ export const Footer = () => {
           <div className="col-span-1 lg:col-span-2">
             <Link to="/" className="block mb-6">
               <img
-                src="https://cdn.builder.io/api/v1/image/assets/TEMP/73bdf2702665dd02883d6dd72fe981922edc43de"
+                src="/lovable-uploads/2053c657-4918-41fe-8fc3-3207c5440755.png"
                 alt="OutSource Pro Logo"
                 className="h-8 w-auto"
               />
