@@ -20,7 +20,7 @@ export const Footer = () => {
               <img
                 src="https://cdn.builder.io/api/v1/image/assets/TEMP/73bdf2702665dd02883d6dd72fe981922edc43de"
                 alt="OutSource Pro Logo"
-                className="h-8 w-auto invert"
+                className="h-8 w-auto"
               />
             </Link>
             <p className="text-gray-400 mb-6 max-w-md">
