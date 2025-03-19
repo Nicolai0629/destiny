@@ -100,7 +100,7 @@ export const Header = () => {
                     key={link.path}
                     to={link.path}
                     className={cn(
-                      "text-gray-700 py-3 px-4 rounded-md hover:bg-indigo-50 hover:text-indigo-600 transition-all",
+                      "text-gray-700 py-3 px-4 rounded-md hover:bg-indigo-50 hover:text-indigo-600 transition-all bg-white",
                       location.pathname === link.path ? "bg-indigo-50 text-indigo-600 font-medium" : ""
                     )}
                   >
