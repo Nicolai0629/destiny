@@ -1,10 +1,7 @@
-
 import { PageLayout } from "@/components/layout/page-layout";
 import { Hero } from "@/components/sections/Hero";
 import { Services } from "@/components/sections/Services";
 import { WhyUs } from "@/components/sections/WhyUs";
-import { FAQ } from "@/components/sections/FAQ";
-import { Contact } from "@/components/sections/Contact";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { BlogPreview } from "@/components/sections/BlogPreview";
 import { Pricing } from "@/components/sections/Pricing";
@@ -12,6 +9,7 @@ import { SectionContainer } from "@/components/ui/section-container";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { CtaSection } from "@/components/sections/CtaSection";
 
 const Index = () => {
   return (
@@ -147,9 +145,8 @@ const Index = () => {
       
       <BlogPreview />
       
-      <FAQ />
-      
-      <Contact />
+      {/* CTA Section - New section to replace FAQ and Contact */}
+      <CtaSection />
     </PageLayout>
   );
 };
