@@ -102,7 +102,7 @@ export const Pricing = ({ checkoutPath = "/checkout" }: PricingProps) => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 bg-black p-8 rounded-2xl">
           {pricingPlans.map((plan, index) => (
             <Card 
               key={index}
